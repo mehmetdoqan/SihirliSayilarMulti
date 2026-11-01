@@ -3,7 +3,7 @@
   "use strict";
   const $ = (s) => document.querySelector(s);
   const APP_CONFIG = {
-    url: "https://gnikcxotvdjavbmpwbep.supabase.co",
+    url: "https://gnikcxotvdiavbmpwbep.supabase.co",
     key: "sb_publishable_JFy19xvOB8Q9faUiUh-QMw_AkRFRd7h"
   };
   const panel = $("#multiplayerPanel");
