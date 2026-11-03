@@ -1,6 +1,6 @@
 Sihirli Sayılar — Çok Oyunculu MVP
 
-
+https://mehmetdoqan.github.io/SihirliSayilarMulti/
 database U&z$n9-HiRg6&9_ Bu paket, mevcut Sihirli Sayılar HTML oyununa 2–4 kişilik, oda koduyla katılınan internet üzerinden yarışma prototipi ekler.
 
 Paket içeriği
