@@ -42,17 +42,32 @@ h1{font-size:clamp(24px,4vw,35px);margin:0;letter-spacing:-1px}h2{font-size:17px
 .mp-field{display:grid;gap:5px;font-size:12px;font-weight:700;color:#586985}.mp-field input,.mp-field select{width:100%;min-width:0;border:1px solid #dce4f0;border-radius:10px;padding:10px;background:#fff;color:#263550;font:inherit;font-size:14px}
 .mp-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.mp-status{margin-top:12px;padding:11px;border-radius:10px;background:#f2f5fb;color:#586985;font-size:13px;line-height:1.5;white-space:pre-line}.mp-status.error{background:#fff0ef;color:#a43b35}.mp-status.success{background:#e9f8ef;color:#217447}
 .mp-roomcode{font-size:25px;font-weight:900;letter-spacing:4px;color:#354e9e}.mp-target{margin-top:10px;padding:13px;border-radius:12px;background:#eef3ff;color:#354e9e;text-align:center;font-weight:850}.mp-target strong{display:block;font-size:34px;line-height:1.2;margin-top:4px}.mp-countdown{position:fixed;inset:0;z-index:110000;display:none;align-items:center;justify-content:center;background:#182641d9;color:#fff;text-align:center}.mp-countdown.show{display:flex}.mp-countdown-inner{font-weight:950;font-size:clamp(64px,18vw,150px);text-shadow:0 8px 35px #0005}.mp-countdown small{display:block;font-size:clamp(16px,4vw,26px);letter-spacing:2px}.mp-players{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.mp-player{padding:7px 10px;border:1px solid #dce4f0;border-radius:999px;font-size:12px;background:#f8faff}.mp-player.me{border-color:#91adff;background:#eaf0ff}.mp-results{margin-top:10px;display:grid;gap:6px}.mp-result{display:flex;justify-content:space-between;gap:10px;padding:9px;border-radius:9px;background:#f7f9fd;font-size:13px}
-@media(max-width:520px){.mp-grid{grid-template-columns:1fr}.header-actions{gap:5px}.header-actions #openMultiplayer{padding:8px;font-size:11px}.multiplayer-panel{padding:12px}}
+.atlas-modal{position:fixed;inset:0;z-index:96000;display:none;align-items:flex-start;justify-content:center;padding:24px 14px;overflow:auto;background:#18264177;backdrop-filter:blur(4px)}.atlas-modal.show{display:flex}
+.atlas-box{width:min(100%,920px);background:#fff;border:1px solid #e2e8f2;border-radius:24px;padding:18px;box-shadow:0 25px 80px #14203d45;animation:pop .2s ease-out}
+.atlas-summary{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 14px}.atlas-chip{padding:6px 10px;border-radius:999px;background:#f2f5fb;font-size:12px;font-weight:700;color:#586985}.atlas-chip b{color:#263550}
+.atlas-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:16px}
+.atlas-heat{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;aspect-ratio:1;width:min(100%,340px);margin:auto}
+.heat-cell{display:grid;place-items:center;align-content:center;gap:1px;border:2px solid transparent;border-radius:10px;padding:0;color:#263550;min-width:0}.heat-cell strong{font-size:clamp(14px,3.4vw,19px);line-height:1}.heat-cell small{font-size:10px;font-weight:700;opacity:.75}.heat-cell.active{border-color:#263550;box-shadow:0 0 0 2px #fff inset}.heat-cell.none{opacity:.35}
+.heat-legend{display:flex;justify-content:center;gap:10px;margin-top:9px;font-size:11px;color:#72809a}.heat-legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.atlas-viewer{display:grid;gap:10px;align-content:start}.atlas-title{font-size:15px;font-weight:850}.atlas-nav{display:flex;align-items:center;justify-content:center;gap:8px}.atlas-nav .btn{min-width:42px}.atlas-pos{min-width:92px;text-align:center;font-weight:800;font-variant-numeric:tabular-nums}
+.mini{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;aspect-ratio:1}.mini div{border-radius:3px;background:#eef2f8}.mini div.e{background:#fff;outline:2px dashed #4777ee;outline-offset:-2px}
+.atlas-big{width:min(100%,250px);margin:auto;gap:4px}.atlas-big div{border-radius:6px}
+.atlas-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px;max-height:300px;overflow:auto;padding:2px}.atlas-gallery button{border:2px solid transparent;border-radius:9px;padding:3px;background:#f7f9fd}.atlas-gallery button.active{border-color:#4777ee}
+.atlas-opts{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:12px;color:#586985}.atlas-opts label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.atlas-lock{padding:30px 10px;text-align:center;color:#586985}.atlas-lock .big{font-size:44px}
+.modal .modal-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+@media(max-width:720px){.atlas-layout{grid-template-columns:1fr}.atlas-box{padding:14px}}
+@media(max-width:520px){.mp-grid{grid-template-columns:1fr}.header-actions{gap:5px}.header-actions #openMultiplayer,.header-actions #openAtlas{padding:8px 7px;font-size:11px}.header-actions{flex-wrap:wrap;justify-content:flex-end}.multiplayer-panel{padding:12px}}
 
 @media(max-width:720px){.layout{grid-template-columns:1fr}.panel{padding:12px}.pieces{grid-template-columns:repeat(3,minmax(0,1fr))}.menu-modal{padding:72px 10px 10px}.menu-box{width:100%}}
-@media(max-width:420px){body{padding:8px}.pieces{grid-template-columns:repeat(2,minmax(0,1fr))}.board{gap:3px}.controls .btn{flex:1}.header-actions .dice-button{width:44px;height:44px}}
+@media(max-width:420px){body{padding:8px}.controls .btn{white-space:nowrap}.pieces{grid-template-columns:repeat(2,minmax(0,1fr))}.board{gap:3px}.controls .btn{flex:1}.header-actions .dice-button{width:44px;height:44px}}
 </style>
 </head>
 <body>
 <div class="app">
 <header>
   <div class="brand"><div class="logo">✦</div><div><h1>Sihirli Sayılar</h1><div class="sub">Sayıyı keşfet, parçaları yerleştir!</div></div></div>
-  <div class="header-actions"><button class="btn" id="openMultiplayer" title="Çok oyunculu oyun">🌐 Çok oyunculu</button><button class="dice-button" id="openMenu" aria-label="Sayı ve süre menüsü" title="Sayı ve süre menüsü">🎲</button></div>
+  <div class="header-actions"><button class="btn" id="openAtlas" title="Tüm çözümler">📚 Çözümler</button><button class="btn" id="openMultiplayer" title="Çok oyunculu oyun">🌐 Çok oyunculu</button><button class="dice-button" id="openMenu" aria-label="Sayı ve süre menüsü" title="Sayı ve süre menüsü">🎲</button></div>
 </header>
 
 
@@ -95,7 +110,7 @@ h1{font-size:clamp(24px,4vw,35px);margin:0;letter-spacing:-1px}h2{font-size:17px
     <div class="stat"><strong id="empty">25</strong><span>Boş hücre</span></div>
   </div>
   <div class="controls">
-    <button class="btn" id="rotate">↻ Döndür</button><button class="btn" id="flip">↔ Aynala</button><button class="btn" id="undo">↶ Geri al</button><button class="btn" id="reset">⟲ Sıfırla</button>
+    <button class="btn" id="rotate">↻ Döndür</button><button class="btn" id="flip">↔ Aynala</button><button class="btn" id="undo">↶ Geri al</button><button class="btn" id="reset">⟲ Sıfırla</button><button class="btn" id="hint" title="Bir parçayı doğru yerine koy">💡 İpucu</button>
   </div>
   <div class="notice" id="boardNotice">Bir parçayı basılı tutup tahtaya sürükleyin. Tahtadaki parçaları da sürükleyerek taşıyabilirsiniz.</div>
 </section>
@@ -147,7 +162,14 @@ h1{font-size:clamp(24px,4vw,35px);margin:0;letter-spacing:-1px}h2{font-size:17px
   </div>
 </div>
 
-<div id="mpCountdown" class="mp-countdown" aria-live="assertive"><div class="mp-countdown-inner"><small>HAZIR OL</small><span id="mpCountdownValue">3</span></div></div>
+<div id="atlasModal" class="atlas-modal" role="dialog" aria-modal="true" aria-labelledby="atlasTitle">
+  <div class="atlas-box">
+    <div class="menu-head"><h2 id="atlasTitle">📚 Çözüm Atlası</h2><button class="menu-close" id="closeAtlas" aria-label="Kapat">×</button></div>
+    <div id="atlasBody"></div>
+  </div>
+</div>
+
+<div id="mpCountdown"class="mp-countdown" aria-live="assertive"><div class="mp-countdown-inner"><small>HAZIR OL</small><span id="mpCountdownValue">3</span></div></div>
 <div id="timerFocus" class="timer-focus" role="dialog" aria-modal="true" aria-label="Büyük geri sayım">
   <div class="timer-focus-card">
     <button id="timerFocusClose" class="timer-focus-close" aria-label="Büyük sayacı kapat">×</button>
@@ -162,7 +184,7 @@ h1{font-size:clamp(24px,4vw,35px);margin:0;letter-spacing:-1px}h2{font-size:17px
 <div id="resultModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
   <div id="modalBox" class="modal-box">
     <button id="closeResult" class="close" aria-label="Kapat">×</button>
-    <div id="modalArt" class="modal-art">🌟</div><h2 id="resultTitle">Başardın!</h2><p id="resultText"></p><button id="modalAction" class="btn primary">Devam et</button>
+    <div id="modalArt" class="modal-art">🌟</div><h2 id="resultTitle">Başardın!</h2><p id="resultText" style="white-space:pre-line"></p><div class="modal-actions"><button id="modalAction" class="btn primary">Devam et</button><button id="modalSolutions" class="btn" style="display:none">📚 Çözümleri gör</button></div>
   </div>
 </div>
 
@@ -261,17 +283,22 @@ board.addEventListener("pointerdown",e=>{const cell=e.target.closest(".cell");if
 document.querySelector("#rotate").onclick=()=>transform(selected,"rotate");document.querySelector("#flip").onclick=()=>transform(selected,"flip");document.querySelector("#undo").onclick=restore;
 document.querySelector("#reset").onclick=()=>{save();names.forEach(n=>pieces[n]={cells:copy(INITIAL[n]),anchor:null});selected=null;render();message("Yeni oyun hazır.");answerMessage("Parçaları yerleştirerek başlayın.")};
 function answerMessage(text,type=""){const el=document.querySelector("#answerNotice");el.textContent=text;el.className="notice "+type}
-function showResult(success,title,text,art){const box=document.querySelector("#modalBox");box.className="modal-box "+(success?"success":"retry");document.querySelector("#resultTitle").textContent=title;document.querySelector("#resultText").textContent=text;document.querySelector("#modalArt").textContent=art;document.querySelector("#modalAction").textContent=success?"Harika!":"Yeniden dene";document.querySelector("#resultModal").classList.add("show")}
+let resultSolutionsTarget=null;
+function showResult(success,title,text,art,solutionsTarget){const box=document.querySelector("#modalBox");box.className="modal-box "+(success?"success":"retry");document.querySelector("#resultTitle").textContent=title;document.querySelector("#resultText").textContent=text;document.querySelector("#modalArt").textContent=art;document.querySelector("#modalAction").textContent=success?"Harika!":"Yeniden dene";resultSolutionsTarget=solutionsTarget===undefined?null:solutionsTarget;document.querySelector("#modalSolutions").style.display=(resultSolutionsTarget!==null&&window.SihirliAtlas)?"":"none";document.querySelector("#resultModal").classList.add("show")}
+document.querySelector("#modalSolutions").onclick=()=>{const t=resultSolutionsTarget;closeResult();if(window.SihirliAtlas)window.SihirliAtlas.open(t)};
+// Etkin meydan okumanın hedef hücresi ("1"–"24"), yoksa null
+function challengeTarget(){const a=currentChallenge?.answer;return Number.isInteger(a)&&a>=1&&a<=24?String(a):null}
 function closeResult(){document.querySelector("#resultModal").classList.remove("show")}
 document.querySelector("#closeResult").onclick=closeResult;document.querySelector("#modalAction").onclick=closeResult;document.querySelector("#resultModal").addEventListener("click",e=>{if(e.target.id==="resultModal")closeResult()});
 document.querySelector("#check").onclick=()=>{
  const covered=names.reduce((s,n)=>s+(pieces[n].anchor?pieces[n].cells.length:0),0);
  if(covered!==24){showResult(false,"Tekrar Dene!","Henüz bütün parçalar yerleşmedi. Altı parçayı da tahtaya yerleştirmeyi dene.","🧩");return}
  const empty=[...Array(25).keys()].find(i=>!pieceAt(i));if(empty===undefined){showResult(false,"Tekrar Dene!","Boş hücre bulunamadı.","🔎");return}
- const actual=empty===12?"center":String(empty<12?empty+1:empty);
+ const actual=empty===12?"center":String(empty<12?empty+1:empty),target=challengeTarget();
  if(!answer.value)showResult(false,"Bir cevap seç!","Boş kalan hücrenin numarasını seç ve tekrar kontrol et.","💭");
- else if(answer.value===actual)showResult(true,"Başardın!","Harika iş çıkardın! Boş hücrenin sırrını çözdün. Sen bir Sihirli Sayılar ustasısın!","🏆");
- else showResult(false,"Tekrar Dene!","Biraz daha düşün. Parçaları yeniden düzenleyebilir ve başka bir cevap deneyebilirsin.","🌈");
+ else if(answer.value!==actual)showResult(false,"Tekrar Dene!","Biraz daha düşün. Parçaları yeniden düzenleyebilir ve başka bir cevap deneyebilirsin.","🌈");
+ else if(target&&actual!==target)showResult(false,"Neredeyse!",`Boş hücreyi doğru buldun (${actual==="center"?"merkez":actual}), ama hedef sayı ${target} idi. Parçaları ${target} numaralı hücre boş kalacak şekilde yeniden dizebilir misin?`,"🎯",target);
+ else{if(target)stopTimer(),updateTimerDisplay();showResult(true,"Başardın!",target?`Hedef ${target} numaralı hücreyi boş bırakmayı başardın! Sen bir Sihirli Sayılar ustasısın!`:"Harika iş çıkardın! Boş hücrenin sırrını çözdün. Sen bir Sihirli Sayılar ustasısın!","🏆",actual)}
 };
 
 // Zar menüsü ve sayı meydan okuması
@@ -299,7 +326,7 @@ function buildChallenge(method){
   const a=rand(1,9),b=rand(1,9);value=a+b;label="Toplama işlemi";hint="İşlemin sonucunu bul. Cevap süre sonunda gösterilecek.";
   currentChallenge={answer:value,display:`${a} + ${b} = ?`};
  }else if(method==="subtract"){
-  const a=rand(1,9),b=rand(1,9),high=Math.max(a,b),low=Math.min(a,b);value=high-low;label="Çıkarma işlemi";hint="İşlemin sonucunu bul. Negatif sonuç yok; cevap süre sonunda gösterilecek.";
+  let a,b;do{a=rand(1,9);b=rand(1,9)}while(a===b);const high=Math.max(a,b),low=Math.min(a,b);value=high-low;label="Çıkarma işlemi";hint="İşlemin sonucunu bul. Negatif sonuç yok; cevap süre sonunda gösterilecek.";
   currentChallenge={answer:value,display:`${high} − ${low} = ?`};
  }else if(method==="multiply"){
   let a,b;do{a=rand(1,9);b=rand(1,9)}while(a*b>24);
@@ -321,7 +348,8 @@ function buildChallenge(method){
   else if(method==="multiply") {let a,b;do{a=rand(1,9);b=rand(1,9)}while(a*b>24);challengeValue.textContent=`${a} × ${b} = ?`;}
   else challengeValue.textContent=questionArchive[rand(0,questionArchive.length-1)].question;
   ticks++;
-  if(ticks>=14){clearInterval(rollInterval);rollInterval=null;challengeValue.classList.remove("rolling");challengeValue.textContent=currentChallenge.display;updateTimerDisplay()}
+  if(ticks>=14){clearInterval(rollInterval);rollInterval=null;challengeValue.classList.remove("rolling");challengeValue.textContent=currentChallenge.display;updateTimerDisplay();
+   const info=window.SihirliAtlas?.difficulty(challengeTarget());if(info)document.querySelector("#challengeHint").textContent=`${hint} Bu hedefin ${info.count} farklı çözümü var · ${info.label}.`}
  },65);
  updateTimerDisplay();
 }
@@ -355,7 +383,7 @@ function timerTick(){
   const detail=answerText!==undefined
    ? `${challengeText}\nDoğru cevap: ${answerText}`
    : "Süre tamamlandı. Yeni bir tur başlatabilirsin.";
-  showResult(false,"Süre doldu!",detail,"⏰");
+  showResult(false,"Süre doldu!",detail,"⏰",challengeTarget());
  }
 }
 document.querySelector("#timerStart").onclick=()=>{
@@ -380,10 +408,22 @@ window.SihirliSayiGame={
  getAnswer:()=>answer.value,
  getCorrectEmpty:()=>{const covered=names.reduce((s,n)=>s+(pieces[n].anchor?pieces[n].cells.length:0),0);if(covered!==24)return null;const empty=[...Array(25).keys()].find(i=>!pieceAt(i));return empty===undefined?null:(empty===12?"center":String(empty<12?empty+1:empty))},
  isSolved:()=>{const actual=window.SihirliSayiGame.getCorrectEmpty();return !!actual&&answer.value===actual},
- startMultiplayerTimer:(duration,startAt)=>{stopTimer();chosenSeconds=duration;remainingSeconds=Math.max(0,duration-Math.floor((Date.now()-startAt)/1000));document.querySelectorAll(".timer-option").forEach(b=>b.classList.toggle("active",+b.dataset.seconds===duration));updateTimerDisplay();if(remainingSeconds>0){timerRunning=true;updateTimerDisplay();timerInterval=setInterval(timerTick,1000)}},
+ names,colors:COLORS,
+ // Tahtadaki parçaların mutlak hücre indeksleri: {Z:[0,1,6,7], ...}
+ getPlaced:()=>{const out={};names.forEach(n=>{const p=pieces[n];if(p.anchor)out[n]=p.cells.map(([r,c])=>(p.anchor.r+r)*5+p.anchor.c+c).sort((a,b)=>a-b)});return out},
+ // Mutlak hücre listesinden parçayı yerleştirir (geri alınabilir)
+ placeFromIndices:(map,{replace=false}={})=>{save();if(replace)names.forEach(n=>pieces[n]={cells:copy(INITIAL[n]),anchor:null});Object.entries(map).forEach(([n,idx])=>{const rc=idx.map(i=>[Math.floor(i/5),i%5]),mr=Math.min(...rc.map(p=>p[0])),mc=Math.min(...rc.map(p=>p[1]));pieces[n]={cells:normalize(rc),anchor:{r:mr,c:mc}}});selected=null;render()},
+ resetBoard:()=>{names.forEach(n=>pieces[n]={cells:copy(INITIAL[n]),anchor:null});history=[];selected=null;answer.value="";render()},
+ removePiece:(n)=>{if(!pieces[n]?.anchor)return;save();pieces[n].anchor=null;selected=null;render()},
+ message,answerMessage,challengeTarget,
+ setAnswer:(v)=>{answer.value=v},
+ startMultiplayerTimer:(duration,startAt,target)=>{stopTimer();if(target)currentChallenge={answer:+target,display:`Hedef: ${target}`};chosenSeconds=duration;remainingSeconds=Math.max(0,duration-Math.floor((Date.now()-startAt)/1000));document.querySelectorAll(".timer-option").forEach(b=>b.classList.toggle("active",+b.dataset.seconds===duration));updateTimerDisplay();if(remainingSeconds>0){timerRunning=true;updateTimerDisplay();timerInterval=setInterval(timerTick,1000)}},
+ solutionsLocked:false,
  onChange:null
 };
 </script>
+<script src="solutions.js"></script>
+<script src="solutions-ui.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="multiplayer.js"></script>
 </body>
