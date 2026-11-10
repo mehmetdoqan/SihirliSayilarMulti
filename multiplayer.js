@@ -62,6 +62,9 @@
     if (activeStartKey !== startKey) {
       activeStartKey = startKey;
       timerStartedFor = null;
+      lastSolvedSent = false;
+      // Yeni tur: herkes boş tahtayla başlar (atlastan önceden dizilmiş tahta kullanılamaz).
+      window.SihirliSayiGame?.resetBoard?.();
       if (countdownTicker) clearInterval(countdownTicker);
       const startMs = new Date(r.starts_at).getTime() + 3000;
       const tick = () => {
@@ -81,7 +84,7 @@
             timerStartedFor = startKey;
             if (window.SihirliSayiGame?.startMultiplayerTimer) {
               window.SihirliSayiGame.startMultiplayerTimer(
-                r.duration_seconds || 180, startMs
+                r.duration_seconds || 180, startMs, targetNumber
               );
             }
           }
@@ -90,6 +93,21 @@
       tick();
       countdownTicker = setInterval(tick, 100);
     }
+  }
+  function roundOver(r) {
+    if (r?.status !== "playing" || !r.starts_at) return false;
+    return Date.now() > new Date(r.starts_at).getTime() + 3000 + (r.duration_seconds || 180) * 1000;
+  }
+  function setLocked(v) {
+    if (!window.SihirliSayiGame) return;
+    if (window.SihirliSayiGame.solutionsLocked !== v) {
+      window.SihirliSayiGame.solutionsLocked = v;
+      window.SihirliAtlas?.refresh();
+    }
+  }
+  function difficultyText(n) {
+    const d = window.SihirliAtlas?.difficulty(String(n));
+    return d ? ` (${d.count} çözüm · ${d.label})` : "";
   }
   function renderRoom(data) {
     if (!data) return;
@@ -112,12 +130,12 @@
     const promptEl = $("#mpRoundPrompt");
     if (r.status === "playing") {
       promptEl.style.display = "block";
-      promptEl.textContent = `Hedef sayı: ${targetNumber ?? "—"}. Bu sayıyı boş hücre olarak bırak. Süre: ${Math.round((r.duration_seconds || 180) / 60)} dakika.`;
+      promptEl.textContent = `Hedef sayı: ${targetNumber ?? "—"}${targetNumber ? difficultyText(targetNumber) : ""}. Bu sayıyı boş hücre olarak bırak. Süre: ${Math.round((r.duration_seconds || 180) / 60)} dakika.`;
       updateCountdown(r);
     } else {
       if (r.status === "waiting" && targetNumber !== null) {
         promptEl.style.display = "block";
-        promptEl.textContent = `Ortak hedef sayı: ${targetNumber}. Tur başlayınca bu sayıyı boş hücre olarak bırakmaya çalışın.`;
+        promptEl.textContent = `Ortak hedef sayı: ${targetNumber}${difficultyText(targetNumber)}. Tur başlayınca bu sayıyı boş hücre olarak bırakmaya çalışın.`;
       } else {
         promptEl.style.display = "none";
       }
@@ -137,7 +155,19 @@
     }
     const me = ps.find(p => p.player_id === player?.player_id);
     if (me?.finished_at) setStatus("Oyunu tamamladın. Diğer oyuncular devam edebilir.", "success");
-    $("#mpPickNumber").disabled = !(isHost && r.status === "waiting");
+    // Tur sürerken (ve hedef seçilmişken) çözüm atlası ile ipucu kilitli.
+    const over = roundOver(r) || !!me?.finished_at;
+    setLocked(r.status !== "finished" && !over && (r.status === "playing" || targetNumber !== null));
+    if ((r.status === "finished" || over) && targetNumber !== null && window.SihirliAtlas) {
+      const b = document.createElement("button");
+      b.className = "btn";
+      b.textContent = `📚 Hedef ${targetNumber} için tüm çözümleri gör`;
+      b.onclick = () => window.SihirliAtlas.open(String(targetNumber));
+      resultsEl.appendChild(b);
+    }
+    const canSetup = isHost && (r.status === "waiting" || r.status === "finished");
+    $("#mpPickNumber").disabled = !canSetup;
+    $("#mpPickNumber").textContent = r.status === "finished" ? "🎲 Yeni tur için sayı seç" : "🎲 Rastgele sayı seç";
     $("#mpStart").disabled = !(isHost && ps.length >= 2 && r.status === "waiting" && targetNumber !== null);
     $("#mpLeave").disabled = false;
   }
@@ -182,6 +212,7 @@
     countdownTicker = null; activeStartKey = null; timerStartedFor = null;
     countdown.classList.remove("show");
     room = null; player = null; isHost = false; lastSolvedSent = false; targetNumber = null;
+    setLocked(false);
     roomInfo.style.display = "none";
     $("#mpStart").disabled = true; $("#mpLeave").disabled = true;
   }
@@ -221,7 +252,7 @@
   $("#mpPickNumber").addEventListener("click", async () => {
     try {
       if (!room || !player || !isHost) throw new Error("Sayıyı yalnızca oda sahibi seçebilir.");
-      if (room.status !== "waiting") throw new Error("Tur başladıktan sonra hedef sayı değiştirilemez.");
+      if (room.status === "playing") throw new Error("Tur başladıktan sonra hedef sayı değiştirilemez.");
       const n = Math.floor(Math.random() * 24) + 1;
       const challenge = {
         method: "random", display: String(n), answer: n,
